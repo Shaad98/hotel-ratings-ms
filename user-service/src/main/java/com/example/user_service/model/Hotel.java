@@ -1,5 +1,6 @@
 package com.example.user_service.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Rating {
+public class Hotel {
 
-    private String ratingId;
-    private String userId;
     private String hotelId;
-    private Integer rating;
-    private String comment;
-    
-    private Hotel hotel;
+    private String hotelName;
+    private String location;
+    private String about;
+
 }
