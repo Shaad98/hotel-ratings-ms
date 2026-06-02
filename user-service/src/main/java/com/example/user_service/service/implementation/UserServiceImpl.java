@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         ratings.stream().forEach(rating -> {
 
             Hotel hotel = restTemplate.getForObject(
-                    "http://localhost:8081/hotel/" + rating.getHotelId(),
+                    "http://localhost:8081/hotels/" + rating.getHotelId(),
                     Hotel.class);
 
             rating.setHotel(hotel);
