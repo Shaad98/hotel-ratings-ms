@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,6 +14,7 @@ import com.example.user_service.model.Rating;
 import com.example.user_service.model.User;
 import com.example.user_service.repository.UserRepository;
 import com.example.user_service.service.UserService;
+import com.example.user_service.service.external.HotelService;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HotelService hotelService;
 
     @Override
     public Optional<User> createUser(User user) {
@@ -42,9 +47,13 @@ public class UserServiceImpl implements UserService {
 
         ratings.stream().forEach(rating -> {
 
-            Hotel hotel = restTemplate.getForObject(
-                    "http://hotel-service/hotels/" + rating.getHotelId(),
-                    Hotel.class);
+            // Hotel hotel = restTemplate.getForObject(
+            //         "http://hotel-service/hotels/" + rating.getHotelId(),
+            //         Hotel.class);
+
+            ResponseEntity<Hotel> response = hotelService.getHotelById(rating.getHotelId());
+
+            Hotel hotel = response.getBody();
 
             rating.setHotel(hotel);
         });
