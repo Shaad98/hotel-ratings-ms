@@ -13,7 +13,7 @@ public class Rating {
     private String ratingId;
     private String userId;
     private String hotelId;
-    private Integer rating;
+    private Integer rate;
     private String comment;
     
     private Hotel hotel;

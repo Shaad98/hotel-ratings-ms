@@ -1,6 +1,6 @@
 package com.example.hotel_service.model;
 
-import org.bson.types.ObjectId;
+// import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 public class Hotel {
 
     @Id
-    private ObjectId hotelId;
+    // private ObjectId hotelId;
+    private String hotelId;
     private String hotelName;
     private String location;
     private String about;

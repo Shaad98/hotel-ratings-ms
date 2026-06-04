@@ -13,7 +13,7 @@ public interface HotelService {
     Optional<Hotel> createHotel(Hotel hotel);
 
     // Get By ID
-    Optional<Hotel> getHotelById(ObjectId hotelId);
+    Optional<Hotel> getHotelById(String hotelId);
 
     // Get All
     List<Hotel> getAllHotels();

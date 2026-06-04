@@ -2,6 +2,7 @@ package com.example.hotel_service.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,12 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     public Optional<Hotel> createHotel(Hotel hotel) {
-      return Optional.ofNullable(hotelRepository.save(hotel));
+         hotel.setHotelId(UUID.randomUUID().toString());
+       return Optional.ofNullable(hotelRepository.save(hotel));
     }
 
     @Override
-    public Optional<Hotel> getHotelById(ObjectId hotelId) {
+    public Optional<Hotel> getHotelById(String hotelId) {
        return hotelRepository.findById(hotelId);
     }
 
