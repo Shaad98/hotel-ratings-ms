@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Rating[] ratingsArray = restTemplate.getForObject(
-                "http://localhost:8082/ratings/users/" + userId,
+                "http://rating-service/ratings/users/" + userId,
                 Rating[].class);
 
         List<Rating> ratings = Arrays.asList(ratingsArray);
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         ratings.stream().forEach(rating -> {
 
             Hotel hotel = restTemplate.getForObject(
-                    "http://localhost:8081/hotels/" + rating.getHotelId(),
+                    "http://hotel-service/hotels/" + rating.getHotelId(),
                     Hotel.class);
 
             rating.setHotel(hotel);
