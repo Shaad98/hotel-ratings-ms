@@ -16,6 +16,8 @@ public class  RatingServiceImpl implements RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
+    
+
     @Override
     public Optional<Rating> createRating(Rating rating) {
         return Optional.ofNullable(ratingRepository.save(rating));
