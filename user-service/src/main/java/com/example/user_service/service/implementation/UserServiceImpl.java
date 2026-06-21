@@ -15,6 +15,7 @@ import com.example.user_service.model.User;
 import com.example.user_service.repository.UserRepository;
 import com.example.user_service.service.UserService;
 import com.example.user_service.service.external.HotelService;
+import com.example.user_service.service.external.RatingService;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private HotelService hotelService;
 
+    @Autowired
+    private RatingService ratingService;
+
     @Override
     public Optional<User> createUser(User user) {
         return Optional.ofNullable(userRepository.save(user));
@@ -39,11 +43,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Rating[] ratingsArray = restTemplate.getForObject(
-                "http://rating-service/ratings/users/" + userId,
-                Rating[].class);
+        // Rating[] ratingsArray = restTemplate.getForObject(
+        //         "http://rating-service/ratings/users/" + userId,
+        //         Rating[].class);
 
-        List<Rating> ratings = Arrays.asList(ratingsArray);
+        // List<Rating> ratings = Arrays.asList(ratingsArray);
+
+        List<Rating> ratings = ratingService.getAllRatingsOfUserByUserId(userId).getBody();
 
         ratings.stream().forEach(rating -> {
 
